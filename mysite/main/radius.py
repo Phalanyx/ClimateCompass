@@ -1,19 +1,22 @@
 from shapely.geometry import Polygon, MultiPolygon
 from geopy.distance import geodesic
 import json
+from disaster_data import get_disaster_data
+from decouple import config
 
-def calculate_circle_radius_from_geojson(json_file_path):
-    with open(json_file_path, 'r') as f:
-        geojson_data = json.load(f)
 
+#idea for the function is that it computes the total area of all pol
+
+# Assuming get_disaster_data fetches JSON data and returns it as a dictionary
+json_data = get_disaster_data("FLOOD", config("KEY"), "h1")
+
+def calculate_circle_radius_from_geojson(geojson_data):
     polygons = []
     for feature in geojson_data['features']:
         geom = feature['geometry']
         if geom['type'] == 'Polygon':
-            # Directly append the Polygon object
             polygons.append(Polygon(geom['coordinates'][0]))
         elif geom['type'] == 'MultiPolygon':
-            # For MultiPolygon, iterate over each polygon and append
             for coords in geom['coordinates']:
                 polygons.append(Polygon(coords[0]))
 
@@ -33,11 +36,10 @@ def calculate_circle_radius_from_geojson(json_file_path):
 
     return max_distance, (centroid.y, centroid.x)
 
-json_file_path = '/Users/danielvenistan/Documents/GitHub/starterhacks/mysite/main/message.json'  # Update this path
-radius, center = calculate_circle_radius_from_geojson(json_file_path)
+# Example usage with the JSON data
+radius, center = calculate_circle_radius_from_geojson(json_data)
 if radius is not None:
-    print(f"Radius: {radius} meters")
+    print(f"Radius: {radius + 2000} meters") #we add an extra 2 kilometers for safety or we could not
     print(f"Center: {center}")
 else:
-    print("No polygons found in the GeoJSON file.")
-
+    print("No polygons found in the GeoJSON data.")
