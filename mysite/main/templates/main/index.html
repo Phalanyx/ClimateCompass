@@ -1,19 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Google Maps with Local JSON</title>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBwPXe47GpfSR8SAgeJyRkz1Uvs70Gc-M"></script>
-  <style>
-    #map {
-      height: 100%;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+    <title>Google Maps Example</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBwPXe47GpfSR8SAgeJyRkz1Uvs70Gc-M"></script>
+    <script>
+        function initializationCallback() {
+            // Initialize the map with the center at Bucaramanga
+            var map = new google.maps.Map(document.getElementById('google-maps-container'), {
+                center: {
+                    lat: 7.119082288502541,
+                    lng: -73.120029012106
+                },
+                zoom: 2, // Set a lower zoom level to make the circles visible when zoomed out
+                mapTypeId: 'roadmap'
+            });
+
+            // Coordinates of the center of Bucaramanga
+            var center = { lat: 7.119082288502541, lng: -73.120029012106 };
+
+            // Colors for the layers (40 different colors)
+            var colors = [
+                '#FF0000', '#FF1A00', '#FF3300', '#FF4D00', '#FF6600', 
+                '#FF8000', '#FF9900', '#FFB200', '#FFCC00', '#FFE600',
+                '#FFFF00', '#E6FF00', '#CCFF00', '#B2FF00', '#99FF00',
+                '#80FF00', '#66FF00', '#4DFF00', '#33FF00', '#1AFF00',
+                '#00FF00', '#00FF1A', '#00FF33', '#00FF4D', '#00FF66',
+                '#00FF80', '#00FF99', '#00FFB2', '#00FFCC', '#00FFE6',
+                '#00FFFF', '#00E6FF', '#00CCFF', '#00B2FF', '#0099FF',
+                '#0080FF', '#0066FF', '#004DFF', '#0033FF', '#001AFF'
+            ];
+
+            // Helper function to generate a circle path
+            function createCircle(center, radius, numPoints) {
+                var circlePath = [];
+                var angleStep = 360 / numPoints;
+                for (var i = 0; i <= numPoints; i++) {
+                    var angle = angleStep * i;
+                    var radians = angle * (Math.PI / 180);
+                    var lat = center.lat + (radius / 6371000) * (180 / Math.PI) * Math.sin(radians);
+                    var lng = center.lng + (radius / 6371000) * (180 / Math.PI) / Math.cos(center.lat * Math.PI / 180) * Math.cos(radians);
+                    circlePath.push({ lat: lat, lng: lng });
+                }
+                return circlePath;
+            }
+
+            // Create rings with increasing radius and different colors
+            for (var i = 0; i < 40; i++) {
+                var outerRadius = (i + 1) * 10000; // Radius in meters, increased significantly
+                var innerRadius = i * 10000; // Radius in meters, increased significantly
+                var outerPath = createCircle(center, outerRadius, 360);
+                var innerPath = createCircle(center, innerRadius, 360);
+
+                // Construct the ring using a polygon with a hole
+                var ring = new google.maps.Polygon({
+                    paths: [outerPath, innerPath.reverse()],
+                    strokeColor: '#000000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 1,
+                    fillColor: colors[i % colors.length], // Use modulo to cycle through colors
+                    fillOpacity: 0.35, // Adjust transparency
+                    map: map
+                });
+            }
+        }
+    </script>
 </head>
+<<<<<<< Updated upstream
 <body>
   <div id="map"></div>
   <script>
@@ -72,5 +124,9 @@ makeGetRequest('http://127.0.0.1:500');
 
 window.initMap = initMap;
   </script>
+=======
+<body onload="initializationCallback()">
+    <div id="google-maps-container" style="height: 500px; width: 100%;"></div>
+>>>>>>> Stashed changes
 </body>
 </html>
