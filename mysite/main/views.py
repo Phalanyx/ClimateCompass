@@ -15,4 +15,6 @@ def send_geo_data(request):
 def index(request):
     context = {"message": "Hello"}  # Use a dictionary here
     return render(request, "main/index.html", context)
-    
+
+def main_page(request):
+    return render(request, "main/mainpage.html")
