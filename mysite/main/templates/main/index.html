@@ -22,6 +22,7 @@
     // This example uses the Google Maps JavaScript API's Data layer
 // to create a rectangular polygon with 2 holes in it.
 function initMap() {
+  
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 6,
     center: { lat: -33.872, lng: 151.252 },
@@ -56,10 +57,20 @@ function initMap() {
     ]),
   });
 }
+function makeGetRequest(path) {
+    axios.post(path, address).then(
+        (response) => {
+            var result = response.data;
+            console.log(result);
+        },
+        (error) => {
+            console.log(error);
+        }
+    );
+}
+makeGetRequest('http://127.0.0.1:500');
 
 window.initMap = initMap;
-
-map.data.loadGeoJson('testing.json');
   </script>
 </body>
 </html>
