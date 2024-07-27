@@ -5,8 +5,8 @@ import os
 
 class Place(models.Model):
     place_name = models.CharField(max_length=200)
-    lat = models.DecimalField()
-    long = models.DecimalField()
+    lat = models.DecimalField(decimal_places=8, max_digits=30)
+    long = models.DecimalField(decimal_places=8, max_digits=30)
     
     def getNearbyResources(resource_name):
         google_places = GooglePlaces(os.getenv('GOOGLE_PLACES_KEY'))
