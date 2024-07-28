@@ -1,17 +1,18 @@
 import os
 from groq import Groq
-from dotenv import load_dotenv
+from decouple import config
 
 
-load_dotenv()
 
-client = Groq(
-    api_key=os.environ.get("GROQ_API_KEY")
-    
-)
+
 
 # Function to get information for a specific location
 def get_location_info_goverment_aid_polices(location):
+    client = Groq(
+    api_key = config('GROQ_API_KEY')
+    
+)
+
     # Create a query based on the user's input location
     query = (
         f"I am currently residing in {location.upper()}, is there anything I need to know regarding "
@@ -41,10 +42,18 @@ def get_location_info_goverment_aid_polices(location):
     )
 
     # Print the response
+    ret = []
+    ret.append("GOVERNMENT AID AND POLICIES:")
     for chunk in completion:
-        print(chunk.choices[0].delta.content or "", end="")
+        ret.append(chunk.choices[0].delta.content)
+    return ret
 
 def get_location_info_relocations(location):
+    client = Groq(
+    api_key = config('GROQ_API_KEY')
+    
+)
+
     # Create a query based on the user's input location
     query = (
         f"I am currently residing in {location.upper()}, is there anything I need to know regarding "
@@ -74,11 +83,24 @@ def get_location_info_relocations(location):
     )
 
     # Print the response
+    i = 0
+    ret = []
+    ret.append("RELOCATIONS:")
     for chunk in completion:
-        print(chunk.choices[0].delta.content or "", end="")
+        if (i==5):
+            break
+        
+        ret.append(chunk.choices[0].delta.content)
+        i+=1
+    return ret
 
 # Function to get information for a specific location
 def get_location_info_useful_knowledge(location):
+    client = Groq(
+    api_key = config('GROQ_API_KEY')
+    
+)
+
     # Create a query based on the user's input location
     query = (
         f"I am currently residing in {location.upper()}, is there anything I need to know regarding "
@@ -111,11 +133,23 @@ def get_location_info_useful_knowledge(location):
     )
 
     # Print the response
+    i = 0
+    ret = []
+    ret.append("USEFUL KNOWLEDGE:")
     for chunk in completion:
-        print(chunk.choices[0].delta.content or "", end="")
+        if (i==5):
+            break
+        ret.append(chunk.choices[0].delta.content)
+        i+=1
+    return ret
 
 # Function to get information for a specific location
 def get_location_info_emergency_contacts(location):
+    client = Groq(
+    api_key = config('GROQ_API_KEY')
+    
+)
+
     # Create a query based on the user's input location
     query = (
         f"I am currently residing in {location.upper()}, is there anything I need to know regarding "
@@ -144,14 +178,19 @@ def get_location_info_emergency_contacts(location):
     )
 
     # Print the response
+    i = 0
+    ret = []
     for chunk in completion:
-        print(chunk.choices[0].delta.content or "", end="")
+        if (i==5):
+            break
+        ret.append(chunk.choices[0].delta.content)
+        i+=1
+    return ret
 
 # Example usage
-'''
-location = "Manila, Philippines"  # Replace this with any location you want to query
-get_location_info_goverment_aid_polices(location)
-get_location_info_relocations(location)
-get_location_info_useful_knowledge(location)
-get_location_info_emergency_contacts(location)
-'''
+#location = "Manila, Philippines"  # Replace this with any location you want to query
+#get_location_info_goverment_aid_polices(location)
+#get_location_info_relocations(location)
+#get_location_info_useful_knowledge(location)
+#get_location_info_emergency_contacts(location)
+

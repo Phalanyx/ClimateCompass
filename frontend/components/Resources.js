@@ -3,14 +3,31 @@ import '../app/globals.css'
 import React from 'react'
 import Image from 'next/image';
 import compass from '../images/compass.svg';
-
-
+import { useState } from 'react';
+import axios from 'axios';
 
 
 const Resources = (props) => {
 
-  
-  
+
+  const [aidData, setAidData] = useState(''); 
+  const val = { 'address': props.name }
+  const load = () => {
+
+    axios.post('http://127.0.0.1:8000/main/aid/',val ).then(response => {
+      const data = response.data;
+      if (data !== '') {
+        const new_data = data[0];
+        new_data.concat(data[1]);
+        new_data.concat(data[2]);
+        setAidData(new_data);
+        console.log(aidData);
+      }
+      
+    }).catch((error) => {
+        console.log(error);
+    });
+    }
   return (
   <div>
     
@@ -61,6 +78,7 @@ const Resources = (props) => {
     <h2 className="mt-10 mx-auto max-w-4xl font-display text-3xl font-bold tracking-normal text-slate-900 sm:text-4xl flex items-center text-left">
       Results for {props.name} 
     </h2>
+    <button onClick={load}>Load data</button>
     <p class="mx-auto mt-12 max-w-xl text-lg text-slate-700 leading-7">Here, you will find the most
       <span className="font-bold"> essential </span> climate details about your
       specified location.</p>
@@ -107,7 +125,7 @@ const Resources = (props) => {
         </summary>
         <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
-  <p className="text-black text-2xl font-bold">Put AI output here</p>
+  <p className="text-black text-2xl font-bold">{aidData}</p>
 </div>
         </div>
     </details>

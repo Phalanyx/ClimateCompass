@@ -48,20 +48,24 @@ def get_active_hazard(lat, lon):
     print(min_lon, min_lat, max_lon, max_lat)
     new_req = f"""https://apps.kontur.io/events/v1/geojson/events?access_token={key}
     &feed=kontur-public&types=&severities=&datetime=2024-07-27T00%3A00%3A00Z%2F..&bbox={min_lon}&bbox={min_lat}&bbox={max_lon}&bbox={max_lat}&limit=20&sortOrder=ASC&episodeFilterType=ANY"""
-    response = requests.get(new_req).json()
+    response = requests.get(new_req)
+    if response.status_code != 200:
+        return None
+    print(response)
+    new_res = response.json()
     i = 1
-    length = len(response["features"])
+    length = len(new_res["features"])
     ret = {}
     ret['episode_type'] = []
     while (i < float(length/2)):
-        if (response["features"][i]["properties"]["episode_type"]) not in ret:
-            ret['episode_type'].append(response["features"][i]["properties"]["episode_type"])
+        if (new_res["features"][i]["properties"]["episode_type"]) not in ret:
+            ret['episode_type'].append(new_res["features"][i]["properties"]["episode_type"])
         i+=2
     return ret
 
 
 
-print(get_active_hazard(-117,52))
+print(get_active_hazard(43,-79))
 
 
 
