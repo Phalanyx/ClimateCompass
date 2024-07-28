@@ -11,17 +11,27 @@ const Hero = () => {
 
   const [state , setState] = useState(0);
   const [newResp, setResponse] = useState({});
-  
+  const [name, setName] = useState('');
+  const [news1 , setNews1] = useState([]);
+  const [news2 , setNews2] = useState([]);
+  const [news3 , setNews3] = useState([]);
+
+
+
 
   const handleButtonClick = () => {
-
-    var val = {address:"Jasper, Alberta"}
-    console.log(val)
+    setName(document.getElementById('query').value);
+    var val = {address: document.getElementById('query').value}
     axios.post('http://127.0.0.1:8000/main/api/', val).then(response => {
-        console.log(response.data);
         const data = response.data;
         setResponse(data);
         setState(1);
+        const valuesArray = Object.values(data.news[0][0]).slice(1);
+        setNews1(valuesArray);
+        const valuesArray2 = Object.values(data.news[1][0]).slice(1);
+        setNews2(valuesArray2);
+        const valuesArray3 = Object.values(data.news[2][0]).slice(1);
+        setNews3(valuesArray3);
     }).catch((error) => {
         console.log(error);
     });
@@ -90,7 +100,7 @@ return (
 
     :
     <div>
-    <Resources type={newResp.type.episode_type} refuge={newResp.refuge} news={newResp.news}></Resources>
+    <Resources type={newResp.type.episode_type} refuge={newResp.refuge} name={name} news1={news1} news2={news2} news3={news3}></Resources>
     </div>
   );
 };

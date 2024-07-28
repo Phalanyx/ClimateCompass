@@ -59,7 +59,7 @@ const Resources = (props) => {
     </h1>
 
     <h2 className="mt-10 mx-auto max-w-4xl font-display text-3xl font-bold tracking-normal text-slate-900 sm:text-4xl flex items-center text-left">
-      Results for (YOUR COUNTRY)
+      Results for {props.name} 
     </h2>
     <p class="mx-auto mt-12 max-w-xl text-lg text-slate-700 leading-7">Here, you will find the most
       <span className="font-bold"> essential </span> climate details about your
@@ -78,8 +78,7 @@ const Resources = (props) => {
 <div className="relative opacity-75">
 
 <h2 className="mt-5 text-2xl bg-white border border-black text-blue-900 font-semibold px-16 py-6 rounded-full hover:bg-blue-100 transition duration-300 text-center flex items-center justify-center">
-          {props.type}
-          {props.news}
+          {props.name}
           <span className='ml-2'>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
           </span></h2>
@@ -118,13 +117,13 @@ const Resources = (props) => {
     <details class="mb-2 w-full">
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
             <span class="font-semibold">Climate Shelters Nearby</span>
-            {props.refuge.map((location, index) => (
-              <p key={index}>{location}</p>
-            ))}
+
         </summary>
         <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
-  <p className="text-black text-2xl font-bold">Put AI output here</p>
+  <p className="text-black text-2xl font-bold">{props.refuge.map((location, index) => (
+              <p key={index}>{location}</p>
+            ))}</p>
 </div>
         </div>
     </details>
@@ -133,11 +132,17 @@ const Resources = (props) => {
 <div class="p-4 mx-auto w-full">
     <details class="mb-2 w-full">
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
-            <span class="font-semibold">Recommended Areas for Relocation</span>
+            <span class="font-semibold">News</span>
         </summary>
         <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
-  <p className="text-black text-2xl font-bold">Put AI output here</p>
+ {props.news1[1]}
+ {props.news1[0]}
+
+  <h1>here</h1>
+  {props.news2}
+  <h1>here</h1>
+  {props.news3}
 </div>
         </div>
     </details>

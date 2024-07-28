@@ -16,8 +16,8 @@ def get_active(request):
     ret = {}
     ret['type'] = dd.get_active_hazard(lon, lat)
     ret['news'] = []
-    ret['refuge'] = dd.find_refuge(lat, lon)
-    for x in ret['type']:
+    ret['refuge'] = dd.find_refuge(lat, lon, addy)
+    for x in ret['type']['episode_type']:
         ret['news'].append(dd.get_news(x, addy))
     return Response(ret, status=status.HTTP_200_OK)
 

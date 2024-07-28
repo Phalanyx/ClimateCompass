@@ -74,7 +74,7 @@ key = config('KEY')
 #print(response["type"]) 
 
 
-def find_refuge(lat, lon):
+def find_refuge(lat, lon, city):
     google_places = GooglePlaces("AIzaSyCDC6_hxlug2x1PM_wP9ocUsgaDWXyNAkE")
 
     query_result = google_places.text_search(
@@ -83,16 +83,23 @@ def find_refuge(lat, lon):
     radius=5000
     )
     ret = []
+    count = 0
     for place in query_result.places:
+        if (count == 6):
+            break
         place.get_details()
         name = place.name
         latitude = place.geo_location['lat']
         longitude = place.geo_location['lng']
-        ret.append([name, latitude, longitude])
+        ret.append([name, city])
+        count+=1
     return ret
 
 def get_news(type, address):
-    api_key = "7a54072947014d7db0bb2a6ee7da9cf9"
+    api_key = "608d159274e54e48839feec01a2434c3"
+    print("here\n")
+    print(type)
+    print(address)
 
     # Define the endpoint and parameters
     url = 'https://newsapi.org/v2/everything'
@@ -152,3 +159,4 @@ def addy_to_coords(address):
     else:
         print("Location not found")
         return [15.1666665, 47.2500001]
+    
