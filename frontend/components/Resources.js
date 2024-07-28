@@ -78,7 +78,8 @@ const Resources = (props) => {
 <div className="relative opacity-75">
 
 <h2 className="mt-5 text-2xl bg-white border border-black text-blue-900 font-semibold px-16 py-6 rounded-full hover:bg-blue-100 transition duration-300 text-center flex items-center justify-center">
-          {props.data}
+          {props.type}
+          {props.news}
           <span className='ml-2'>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
           </span></h2>
@@ -117,6 +118,9 @@ const Resources = (props) => {
     <details class="mb-2 w-full">
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
             <span class="font-semibold">Climate Shelters Nearby</span>
+            {props.refuge.map((location, index) => (
+              <p key={index}>{location}</p>
+            ))}
         </summary>
         <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">

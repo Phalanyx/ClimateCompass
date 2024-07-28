@@ -90,7 +90,7 @@ return (
 
     :
     <div>
-    <Resources data={"hi"}></Resources>
+    <Resources type={newResp.type.episode_type} refuge={newResp.refuge} news={newResp.news}></Resources>
     </div>
   );
 };
