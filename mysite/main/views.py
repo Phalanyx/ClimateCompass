@@ -1,15 +1,19 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from django.urls import path
-from . import views
 from django.http import HttpResponse
 from django.template import loader
-
-
+import disaster_data as dd
+from decouple import config
 # Create your views here.
 @api_view(['POST'])
-def send_geo_data(request):
-    req_data = request.data
+def get_active(request):
+    data = request.data
+    lat = data['lat']
+    lon = data['lon']
+    return dd.get_active_hazard(lat, lon)
+
+
     
 
 def index(request):
