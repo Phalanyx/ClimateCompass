@@ -7,6 +7,7 @@ from googleplaces import GooglePlaces
 import ssl
 import certifi
 from geopy.geocoders import Nominatim
+from geopy.adapters import RequestsAdapter
 
 def get_square_bounding_box(center_lat, center_lon ):
     """
@@ -127,28 +128,23 @@ def get_news(type, address):
         print(f"Failed to fetch news articles: {response.status_code}")
     return articles
 
-def addy_to_coords(address):
-        # Create an SSL context with the certifi certificate bundle
+def addy_to_coords(latitude, longitude):
+
     ssl_context = ssl.create_default_context(cafile=certifi.where())
 
-    # Create a custom adapter to use the SSL context
-    from geopy.adapters import RequestsAdapter
+
 
     class CertifiAdapter(RequestsAdapter):
         def __init__(self, *args, **kwargs):
             kwargs['ssl_context'] = ssl_context
             super().__init__(*args, **kwargs)
 
-    # Initialize the Nominatim geocoder with the custom adapter
+
     geolocator = Nominatim(user_agent="Geopy Library", adapter_factory=CertifiAdapter)
 
-    # Entering the location name
-    getLoc = geolocator.geocode(address)
+    location = geolocator.reverse((latitude, longitude))
 
-    if getLoc:
-        # Printing address
-        print(getLoc.address)
-        return [getLoc.longitude, getLoc.latitude]
+    if location:
+        return(location.address)
     else:
-        print("Location not found")
-        return [15.1666665, 47.2500001]
+        return("Location not found")
