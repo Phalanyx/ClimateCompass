@@ -39,6 +39,6 @@ def get_location_info(location):
         print(chunk.choices[0].delta.content or "", end="")
 
 # Example usage
-location = "Manila, Philippines"  # Replace this with any location you want to query
-get_location_info(location)
+#location = "Manila, Philippines"  # Replace this with any location you want to query
+#get_location_info(location)
 

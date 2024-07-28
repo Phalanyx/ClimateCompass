@@ -148,9 +148,10 @@ def get_location_info_emergency_contacts(location):
         print(chunk.choices[0].delta.content or "", end="")
 
 # Example usage
+'''
 location = "Manila, Philippines"  # Replace this with any location you want to query
 get_location_info_goverment_aid_polices(location)
 get_location_info_relocations(location)
 get_location_info_useful_knowledge(location)
 get_location_info_emergency_contacts(location)
-
+'''
