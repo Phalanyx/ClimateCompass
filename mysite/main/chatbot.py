@@ -1,6 +1,5 @@
 import geopandas as gpd
 from shapely.geometry import shape, MultiPolygon, Polygon
-from geopy.distance import geodesic
 
 def create_circle_and_calculate_distance(geojson, buffer_distance):
     # Load GeoJSON data
