@@ -9,13 +9,15 @@ from rest_framework import status
 @api_view(['POST'])
 def get_active(request):
     data = request.data
-    lat = data['lat']
-    lon = data['lon']
+    addy = data['address']
+    coords = dd.addy_to_coords(addy)
+    lon = coords[0]
+    lat = coords[1]
     ret = {}
-    ret['data'] = dd.get_active_hazard(lat, lon)
+    ret['data'] = dd.get_active_hazard(lon, lat)
     
     ret['refuge'] = dd.find_refuge(lat, lon)
-    ret['news'] = dd.get_news() 
+    ret['news'] = dd.get_news("flood", addy) 
     return Response(ret, status=status.HTTP_200_OK)
 
 
