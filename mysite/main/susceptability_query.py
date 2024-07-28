@@ -1,11 +1,11 @@
 import requests
 
-# Define the query parameters
+
 url = "https://api.reliefweb.int/v1/disasters"
 
-# Define the query parameters
+
 params = {
-    'appname': 'YOUR_APP_NAME',  # Replace with your application name or domain
+    'appname': 'YOUR_APP_NAME', 
     'filter[field]': 'date',
     'filter[value][from]': '2011-01-01T00:00:00+00:00',
     'filter[value][to]': '2024-12-31T23:59:59+00:00',
@@ -14,10 +14,11 @@ params = {
     'filter[value]': 'Afghanistan'
 }
 
+country = params['filter[value]']
 response = requests.get(url, params=params)
 data = response.json()
 
-# Print the result
+
 
 
 
@@ -30,7 +31,10 @@ for i in range(0, len(data['data'])):
         counter += 1
 
 
-print(results)
-print('\n')
-print(counter)
-print('\n')
+if (counter >= 7):
+    print("According to the ReliefWeb database for historical natural disaster data, " 
+          + country + 
+          " is susceptible to natural disasters, due to the increased amount of natural disasters in its history.\n")
+else:
+    print("According to the ReliefWeb database for historical natural disaster data, " + country + 
+          " is NOT susceptible to natural disasters, due to the lack of numerous recent disasters.\n")
