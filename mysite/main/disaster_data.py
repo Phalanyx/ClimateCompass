@@ -135,25 +135,35 @@ def get_news(type, address):
         print(f"Failed to fetch news articles: {response.status_code}")
     return articles
 
-def addy_to_coords(latitude, longitude):
+def addy_to_coords(addy):
 
+    # Create an SSL context with the certifi certificate bundle
     ssl_context = ssl.create_default_context(cafile=certifi.where())
 
-
+    # Create a custom adapter to use the SSL context
+    from geopy.adapters import RequestsAdapter
 
     class CertifiAdapter(RequestsAdapter):
         def __init__(self, *args, **kwargs):
             kwargs['ssl_context'] = ssl_context
             super().__init__(*args, **kwargs)
 
-
+    # Initialize the Nominatim geocoder with the custom adapter
     geolocator = Nominatim(user_agent="Geopy Library", adapter_factory=CertifiAdapter)
 
-    location = geolocator.reverse((latitude, longitude))
+    # Entering the location name
+    getLoc = geolocator.geocode(addy)
 
-    if location:
-        return(location.address)
+    if getLoc:
+        # Printing address
+        print(getLoc.address)
+        
+        # Printing latitude and longitude
+        print("Latitude = ", getLoc.latitude, "\n")
+        print("Longitude = ", getLoc.longitude)
+        return [getLoc.longitude, getLoc.latitude]
     else:
         print("Location not found")
         return [15.1666665, 47.2500001]
+
     
