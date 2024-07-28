@@ -102,9 +102,7 @@ def find_refuge(lat, lon, city):
 
 def get_news(type, address):
     api_key = "608d159274e54e48839feec01a2434c3"
-    print("here\n")
-    print(type)
-    print(address)
+
 
     # Define the endpoint and parameters
     url = 'https://newsapi.org/v2/everything'
@@ -115,7 +113,7 @@ def get_news(type, address):
         'sortBy': 'publishedAt',  # sort articles by published date
         'language': 'en'  # get articles in English
     }
-    articles = []
+    new_articles = []
     # Make the request
     response = requests.get(url, params=params)
 
@@ -131,13 +129,13 @@ def get_news(type, address):
             print(f"Description: {article['description']}")
             print(f"URL: {article['url']}")
             print("-" * 40)
-            articles.append(article)
+            new_articles.append(article)
             if (i == 5):
                 break
 
     else:
         print(f"Failed to fetch news articles: {response.status_code}")
-    return articles
+    return new_articles
 
 def addy_to_coords(addy):
 

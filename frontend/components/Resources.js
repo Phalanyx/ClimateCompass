@@ -44,12 +44,11 @@ const Resources = (props) => {
     </h1>
 
     <h2 className="mt-10 mx-auto max-w-4xl font-display text-3xl font-bold tracking-normal text-slate-900 sm:text-4xl flex items-center text-left">
-      Results for (YOUR COUNTRY)
+     {props.name} 
     </h2>
     <button onClick={load}>Load data</button>
     <p class="mx-auto mt-12 max-w-xl text-lg text-slate-700 leading-7">Here, you will find the most
-      <span className="font-bold"> essential </span> climate details about your
-      specified location.</p>
+      <span className="font-bold"> essential </span> climate details about {props.name} </p>
       <nav className=" bg-black rounded-xl text-white font-medium px-4 py-3 sm:mt-10 mt-8 hover:bg-black/80">
         <p className="flex space-x-6 items-center justify-center">
           <a href="#climatemap" className="hover:underline font-mono flex items-center justify-center f">Climate Map</a>
@@ -72,7 +71,9 @@ const Resources = (props) => {
         <section id="climatemap" className="min-h-screen">
         <div className="w-full h-screen bg-gray-500 flex items-center justify-center">
   <div className="bg-blue-frostedLight w-full h-full border-black border ">
-    <p className="text-center">Extremely Large Box For Data Pipe</p>
+    <p className="text-center">  {props.type.map((location, index) => (
+              <p key={index}>{location}</p>
+            ))}</p>
   </div>
 </div>
 
@@ -103,13 +104,15 @@ const Resources = (props) => {
     <details class="mb-2 w-full">
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
             <span class="font-semibold">Climate Shelters Nearby</span>
-            {props.refuge.map((location, index) => (
-              <p key={index}>{location}</p>
-            ))}
+ 
         </summary>
         <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
-  <p className="text-black text-2xl font-bold">Put AI output here</p>
+  <p className="text-black text-2xl font-bold">
+  {props.refuge.map((location, index) => (
+              <p key={index}>{location}</p>
+            ))}
+  </p>
 </div>
         </div>
     </details>
@@ -122,45 +125,32 @@ const Resources = (props) => {
         </summary>
         <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
-  <p className="text-black text-2xl font-bold">Put AI output here</p>
-</div>
-        </div>
-    </details>
-</div>
-
-<div class="p-4 mx-auto w-full">
-    <details class="mb-2 w-full">
-        <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
-            <span class="font-semibold">Nearby Essentials</span>
-        </summary>
-        <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
-        <div className="bg-white w-full">
-        <p className="text-black text-2xl font-bold">
-  <span className='font-light'>This will include food banks,
-  gas stations, counselling services, and nearby ServiceCanada locations. </span></p>
-  <p className='mb-20 text-black text-2xl font-bold'>
-  Put AI output here
-  </p>
-</div>
-        </div>
-    </details>
-</div>
-
-
-<div class="p-4 mx-auto w-full">
-    <details class="mb-2 w-full">
-        <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
-            <span class="font-semibold">Emergency Contacts</span>
-        </summary>
-        <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
-        <div className="bg-white w-full">
   <p className="text-black text-2xl font-bold">
-  Put AI output here
+    {props.news1[1]}
+
+    {props.news1[0]}
+
+    {props.news1[3]}
+
+    {props.news2[1]}
+
+    {props.news2[0]}
+
+    {props.news2[3]}
+    {props.news3[1]}
+
+{props.news3[0]}
+
+{props.news3[3]}
   </p>
 </div>
         </div>
     </details>
 </div>
+
+
+
+
 
 
         </section>
@@ -177,9 +167,10 @@ const Resources = (props) => {
   <p className="absolute top-0 left-0 m-4 text-black text-lg font-bold">
   <span className='font-light'>
         Here you will find the climate practices in your desired area, as well
-        as if your area has been historically susceptible to climate disasters.
+        as if your area has been historically susceptible to climate disasters:
       </span>
-       Put AI output here.
+      <p> </p>
+      According to the ReliefWeb database for historical natural disaster data, {props.name} is NOT susceptible to natural disasters, due to the lack of numerous recent disasters.
   </p>
 </div>
         </section>

@@ -15,10 +15,10 @@ def get_location_info_goverment_aid_polices(location):
 
     # Create a query based on the user's input location
     query = (
-        f"I am currently residing in {location.upper()}, is there anything I need to know regarding "
-        "emergency policies for natural disasters and government aid?\n"
-        f"- Summary of emergency policies for different natural disasters in {location.upper()}\n"
-        f"- Summary of government aid for different natural disasters in {location.upper()}"
+        f"I am currently residing in {location.upper()}, is there anything I need to know regarding"
+        "emergency policies for natural disasters and government aid? do not add or use asterisks or number them\n"
+        f"- Summary of emergency policies for different natural disasters in {location.upper()}do not add or use asterisks or number them\n"
+        f"- Summary of government aid for different natural disasters in {location.upper()} do not add or use asterisks or number them"
     )
 
     # Make the API call
@@ -27,7 +27,7 @@ def get_location_info_goverment_aid_polices(location):
         messages=[
             {
                 "role": "system",
-                "content": f"Provide detailed information about emergency policies and government aid related to natural disasters in {location.upper()}."
+                "content": f"Provide detailed information about emergency policies and government aid related to natural disasters in {location.upper()} do not add or use asterisks or number them."
             },
             {
                 "role": "user",
@@ -56,19 +56,19 @@ def get_location_info_relocations(location):
 
     # Create a query based on the user's input location
     query = (
-        f"I am currently residing in {location.upper()}, is there anything I need to know regarding "
-        "possible permanent and temporary relocations when there are natural disasters?\n"
+        f"I am currently residing in {location.upper()}, is there anything I need to know regarding"
+        "possible permanent and temporary relocations when there are natural disasters? do not add or use asterisks or number them\n"
         f"- Give me a list of possible relocations that the government would advise the people of {location.upper()} "
-        "to move to in the event of a natural disaster."
+        "to move to in the event of a natural disaster. do not add or use asterisks or number them"
     )
 
     # Make the API call
     completion = client.chat.completions.create(
         model="llama3-70b-8192",
-        messages=[
+       messages=[
             {
                 "role": "system",
-                "content": f"Provide detailed information about possible permanent and temporary relocations in case of natural disasters for people residing in {location.upper()}."
+                "content": f"Provide detailed information about possible permanent and temporary relocations in case of natural disasters for people residing in {location.upper()}.do not add or use asterisks or number them"
             },
             {
                 "role": "user",
@@ -105,12 +105,13 @@ def get_location_info_useful_knowledge(location):
     query = (
         f"I am currently residing in {location.upper()}, is there anything I need to know regarding "
         "food banks, essentials to have in a climate emergency, gas stations, and counseling for people "
-        "who were traumatized from natural disasters?\n"
-        f"- Things to have in a climate emergency (e.g., residents in Canada must have KI pills in the event of a nuclear accident) in {location.upper()}\n"
-        f"- Food banks in the area in {location.upper()}\n"
-        f"- Emergency contacts in {location.upper()}\n"
-        f"- Counseling for people who were traumatized from natural disasters in {location.upper()}"
+        "who were traumatized from natural disasters?do not add or use asterisks or number them\n"
+        f"- Things to have in a climate emergency (e.g., residents in Canada must have KI pills in the event of a nuclear accident) in {location.upper()} do not add or use asterisks or number them\n"
+        f"- Food banks in the area in {location.upper()} do not add or use asterisks or number them"
+        f"- Emergency contacts in {location.upper()}do not add or use asterisks or number them\n"
+        f"- Counseling for people who were traumatized from natural disasters in {location.upper()} do not add or use asterisks or number them"
     )
+
 
     # Make the API call
     completion = client.chat.completions.create(
@@ -163,7 +164,7 @@ def get_location_info_emergency_contacts(location):
         messages=[
             {
                 "role": "system",
-                "content": f"Provide detailed information about emergency contacts for natural disasters and general emergencies in {location.upper()}."
+                "content": f"Provide detailed information about emergency contacts for natural disasters and general emergencies in {location.upper()}. do not add or use asterisks or number them"
             },
             {
                 "role": "user",

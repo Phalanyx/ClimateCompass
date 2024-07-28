@@ -10,13 +10,12 @@ const Hero = () => {
 
 
   const [state , setState] = useState(0);
-  const [newResp, setResponse] = useState({type: {episode_type: ["flood"]}, refuge: []});
+  const [newResp, setResponse] = useState({type: {episode_type: ["No Disaster Reported"]}, refuge: []});
   const [name, setName] = useState('');
   const [news1 , setNews1] = useState([]);
   const [news2 , setNews2] = useState([]);
   const [news3 , setNews3] = useState([]);
-  const [empty , setEmpty] = useState(0);
-
+ 
 
 
   const handleButtonClick = () => {

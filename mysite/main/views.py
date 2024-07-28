@@ -20,7 +20,13 @@ def get_active(request):
     ret['news'] = []
     ret['refuge'] = dd.find_refuge(lat, lon, addy)
     for x in ret['type']['episode_type']:
-        ret['news'].append(dd.get_news(x, addy))
+        val = dd.get_news(x, addy)
+        
+        ret['news'].append(val)
+
+    print(ret)
+    print("here")
+    
     return Response(ret, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
@@ -31,7 +37,6 @@ def get_relocation(request):
     ret.append(gq2.get_location_info_goverment_aid_polices(addy))
     ret.append(gq2.get_location_info_useful_knowledge(addy))
     ret.append(gq2.get_location_info_emergency_contacts(addy))
-    print(ret)
     return Response(ret, status=status.HTTP_200_OK)
 
 

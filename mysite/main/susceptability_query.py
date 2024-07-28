@@ -41,5 +41,4 @@ def susceptability_query(country):
             " is NOT susceptible to natural disasters, due to the lack of numerous recent disasters.\n")
     
 
-#print output
-#print(susceptability_query("Japan"))
+print(susceptability_query("Canada"))
