@@ -11,6 +11,7 @@ module.exports = {
         green: {
           50: '#30AF5B',
           90: '#292C27',
+          Figma: '#14AE5C'
         },
         gray: {
           10: '#EEEEEE',
