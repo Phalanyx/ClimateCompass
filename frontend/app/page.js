@@ -1,11 +1,9 @@
-import React from "react";
-import Input from "/components/Input";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
-    <div>
-    <h1 className="text-t text-darker_gray">Hello World</h1>
-    <Input/>
-    </div>
+    <>
+      <Hero></Hero>
+    </>
   );
 }
