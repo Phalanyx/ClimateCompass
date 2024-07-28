@@ -91,7 +91,7 @@ const Resources = (props) => {
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
             <span class="font-semibold">Government Aid and Policies</span>
         </summary>
-        <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
+        <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
   <p className="text-black text-2xl font-bold">{aidData}</p>
 </div>
@@ -107,7 +107,7 @@ const Resources = (props) => {
               <p key={index}>{location}</p>
             ))}
         </summary>
-        <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
+        <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
   <p className="text-black text-2xl font-bold">Put AI output here</p>
 </div>
@@ -118,9 +118,9 @@ const Resources = (props) => {
 <div class="p-4 mx-auto w-full">
     <details class="mb-2 w-full">
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
-            <span class="font-semibold">Recommended Areas for Relocation</span>
+            <span class="font-semibold">Latest News Articles</span>
         </summary>
-        <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
+        <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
   <p className="text-black text-2xl font-bold">Put AI output here</p>
 </div>
@@ -133,11 +133,11 @@ const Resources = (props) => {
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
             <span class="font-semibold">Nearby Essentials</span>
         </summary>
-        <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
+        <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
         <p className="text-black text-2xl font-bold">
   <span className='font-light'>This will include food banks,
-  gas stations, counselling services, and nearby ServiceCanada locations.</span></p>
+  gas stations, counselling services, and nearby ServiceCanada locations. </span></p>
   <p className='mb-20 text-black text-2xl font-bold'>
   Put AI output here
   </p>
@@ -152,10 +152,11 @@ const Resources = (props) => {
         <summary class="text-2xl bg-gray-200 p-4 rounded-lg cursor-pointer shadow-md mb-4 w-full">
             <span class="font-semibold">Emergency Contacts</span>
         </summary>
-        <div class="shadow-2xl bg-white w-full h-96 mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
+        <div class="shadow-2xl bg-white w-full h-96 max-h-screen overflow-auto mx-auto my-8 p-6 rounded-lg flex items-start justify-left">
         <div className="bg-white w-full">
   <p className="text-black text-2xl font-bold">
-  Put AI output here</p>
+  Put AI output here
+  </p>
 </div>
         </div>
     </details>
@@ -172,7 +173,7 @@ const Resources = (props) => {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/><path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/></svg>
           </span></h2>
 
-          <div className="relative mt-10 bg-white w-11/12 h-screen flex flex-col items-center justify-center rounded-lg mx-auto">
+          <div className="relative mt-10 bg-white w-11/12 h-screen flex flex-col items-center justify-center rounded-lg max-h-screen overflow-auto mx-auto">
   <p className="absolute top-0 left-0 m-4 text-black text-lg font-bold">
   <span className='font-light'>
         Here you will find the climate practices in your desired area, as well
