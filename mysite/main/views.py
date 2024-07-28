@@ -14,10 +14,11 @@ def get_active(request):
     lon = coords[0]
     lat = coords[1]
     ret = {}
-    ret['data'] = dd.get_active_hazard(lon, lat)
-    
+    ret['type'] = dd.get_active_hazard(lon, lat)
+    ret['news'] = []
     ret['refuge'] = dd.find_refuge(lat, lon)
-    ret['news'] = dd.get_news("flood", addy) 
+    for x in ret['type']:
+        ret['news'].append(dd.get_news(x, addy))
     return Response(ret, status=status.HTTP_200_OK)
 
 

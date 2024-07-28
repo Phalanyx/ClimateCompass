@@ -7,11 +7,14 @@ import compass from '../images/compass.svg';
 
 
 
-const resources = () => {
-  return (
-    <>
- <section className='bg-blue-frostedLight'>
+const Resources = (props) => {
 
+  
+  
+  return (
+  <div>
+    
+ <section className='bg-blue-frostedLight'>
  <nav class="sticky top-0 z-50 border-gray-200 bg-blue-frostedLight">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href=".." class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -75,7 +78,7 @@ const resources = () => {
 <div className="relative opacity-75">
 
 <h2 className="mt-5 text-2xl bg-white border border-black text-blue-900 font-semibold px-16 py-6 rounded-full hover:bg-blue-100 transition duration-300 text-center flex items-center justify-center">
-          Climate Map
+          {props.data}
           <span className='ml-2'>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
           </span></h2>
@@ -210,9 +213,8 @@ const resources = () => {
       
       
       </section>
-      
-      </>
+      </div>      
   ) 
 }
 
-export default resources
+export default Resources

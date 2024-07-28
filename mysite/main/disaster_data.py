@@ -45,15 +45,23 @@ def get_active_hazard(lat, lon):
     key = config('KEY')
     min_lon, min_lat, max_lon, max_lat = get_square_bounding_box(lon, lat)
     print(min_lon, min_lat, max_lon, max_lat)
-    new_req = "https://apps.kontur.io/events/v1/geojson/events?access_token=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjZDhoWXJtTUxpa1RGTUNaa0NGY1lxOTZPWm9hRE1LajZua2gza18wZ0FRIn0.eyJleHAiOjE3MjIzNTQxMDUsImlhdCI6MTcyMjA5NDkwNSwianRpIjoiOTkyODIyN2MtOGUyOS00MzM0LTgzMTYtNGE0NGUxOWJjMWM1IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hazAxLmtvbnR1ci5pby9yZWFsbXMva29udHVyIiwiYXVkIjpbImV2ZW50LWFwaSIsImFjY291bnQiXSwic3ViIjoiZjpiMzM1ZThiYS0yMWVhLTQzMmUtODViZi1jNzhjNWJlODEzMWU6aHV5bmhhbGJAZ21haWwuY29tIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoia29udHVyX3BsYXRmb3JtIiwic2Vzc2lvbl9zdGF0ZSI6IjMzOGY2NjEyLWYzYTgtNDdhOC04YTBkLTJhNmYyNzk4MWU0ZCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL3Byb2QtZGlzYXN0ZXItbmluamEua29udHVybGFicy5jb20iLCJodHRwczovL2Rpc2FzdGVyLm5pbmphIiwiaHR0cHM6Ly9hcHBzLmtvbnR1ci5pbyJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkVWRU5UQVBJX3JlYWQ6ZmVlZDprb250dXItcHVibGljIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiZXZlbnQtYXBpIjp7InJvbGVzIjpbInJlYWQ6ZmVlZDprb250dXItcHVibGljIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiIzMzhmNjYxMi1mM2E4LTQ3YTgtOGEwZC0yYTZmMjc5ODFlNGQiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFsYmVydCBIdXluaCIsInByZWZlcnJlZF91c2VybmFtZSI6Imh1eW5oYWxiQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbGJlcnQgSHV5bmgiLCJmYW1pbHlfbmFtZSI6IiIsImVtYWlsIjoiaHV5bmhhbGJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJodXluaGFsYkBnbWFpbC5jb20ifQ.WZA5VxP4PU-jNQ1JCSWmz5dJz0gy0PJJ-GkjwzXGqn0gKGWU99AECar5bJU3_0ltluq9me0JX5yOiLBPpIndujK5OoXidhpXa4bxhbGD3UJKjTSU_3FNuMmH0koXRNfXR3sGhmqXNxowRWKEgZzfksqis2GtlIgIrS9WYJo2wHPJGgUFbIjGZkrJeB_FxUWXi_YxjxRfsPgHerQKIG-3TWub7fD7am3wcaaNZA2JdxCgFZDpM3pCjipHdB63fsjsCWxRrSXZJir8_hbg-vM0gMSs5cqM7gsjsmW2XhGCh1M0LoRZoyYFiaIhYgr0EcjDl7Z6zStPRy5G20yQCkAb-Q&feed=kontur-public&types=FLOOD&severities=&datetime=2024-07-27T00%3A00%3A00Z%2F..&bbox=10&bbox=42&bbox=20&bbox=52&limit=20&sortOrder=ASC&episodeFilterType=LATEST"
+    new_req = f"""https://apps.kontur.io/events/v1/geojson/events?access_token={key}
+    &feed=kontur-public&types=&severities=&datetime=2024-07-27T00%3A00%3A00Z%2F..&bbox={min_lon}&bbox={min_lat}&bbox={max_lon}&bbox={max_lat}&limit=20&sortOrder=ASC&episodeFilterType=ANY"""
     response = requests.get(new_req).json()
-    for x in response:
-        print(x)
+    i = 1
+    length = len(response["features"])
+    ret = {}
+    ret['episode_type'] = []
+    while (i < float(length/2)):
+        if (response["features"][i]["properties"]["episode_type"]) not in ret:
+            ret['episode_type'].append(response["features"][i]["properties"]["episode_type"])
+        i+=2
+    return ret
 
-    return response
 
 
-print(get_active_hazard(15.1666665, 47.2500001))
+print(get_active_hazard(-117,52))
+
 
 
 
@@ -83,13 +91,13 @@ def find_refuge(lat, lon):
         ret.append([name, latitude, longitude])
     return ret
 
-def get_news():
+def get_news(type, address):
     api_key = "7a54072947014d7db0bb2a6ee7da9cf9"
 
     # Define the endpoint and parameters
     url = 'https://newsapi.org/v2/everything'
     params = {
-        'q': 'fire AND Jasper, Canada',
+        'q': f'{type} AND {address}',
         'apiKey': api_key,
         'pageSize': 5,  # number of articles to retrieve
         'sortBy': 'publishedAt',  # sort articles by published date

@@ -1,9 +1,38 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import image from '../images/image.svg';
-
+import { useState } from 'react';
+import Resources from "./Resources";
+import axios from 'axios';
 const Hero = () => {
-  return (
+
+
+  const [state , setState] = useState(0);
+  const [newResp, setResponse] = useState({});
+  
+
+  const handleButtonClick = () => {
+
+    var val = {address:"Jasper, Alberta"}
+    console.log(val)
+    axios.post('http://127.0.0.1:8000/main/api/', val).then(response => {
+        console.log(response.data);
+        const data = response.data;
+        setResponse(data);
+        setState(1);
+    }).catch((error) => {
+        console.log(error);
+    });
+
+
+};
+
+  
+return (
+  !state ?
+  
     <section className="bg-blue-frostedLight">
       <div className="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         <div className="mr-auto place-self-center lg:col-span-7">
@@ -23,9 +52,9 @@ const Hero = () => {
       placeholder="Where you located/planning on locating?"
       className="w-full p-3 rounded-md rounded-r-none border-2 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none"
     />
-    <button
+    <button onClick={handleButtonClick}
       className="inline-flex items-center gap-2 bg-blue-frostedDark text-white text-lg font-semibold py-3 px-6 rounded-r-md"
-    >
+    > 
       <span>Search</span>
       <span className="hidden md:block">
         <svg
@@ -40,7 +69,7 @@ const Hero = () => {
           />
         </svg>
       </span>
-    </button>
+      </button>
   </div>
 
 
@@ -58,6 +87,11 @@ const Hero = () => {
 
       </div>
     </section>
+
+    :
+    <div>
+    <Resources data={"hi"}></Resources>
+    </div>
   );
 };
 
