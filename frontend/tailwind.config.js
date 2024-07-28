@@ -26,6 +26,10 @@ module.exports = {
         },
         blue: {
           70: '#021639',
+          Figma: "#271c14",
+          frostedShade: "#44576D",
+          frostedDark: "#29353C",
+          frostedLight: "#AAC7D8"
         },
         yellow: {
           50: '#FEC601',
@@ -34,7 +38,8 @@ module.exports = {
         light_green: '#A9BA9D', 
         slate_green: '#D0D9CD', 
         lighter_gray: '#B2BEB5', 
-        darker_gray: '#828E84'
+        darker_gray: '#828E84',
+        Figma: '#E6E6E6'
       },
       backgroundImage: {
         'bg-img-1': "url('/img-1.png')",
